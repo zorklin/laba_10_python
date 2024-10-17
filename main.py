@@ -44,7 +44,8 @@ def read_file(filename):
         print(f"Error with file: {err}")
     except Exception as err:
         print(f"Error: {err}")
-
+        
+read_file("output.txt")
 write_answer("output.txt", answer_question())
 write_question("output.txt")
 read_file("output.txt")
