@@ -3,7 +3,7 @@
 #функція створює(відкриває) текстовий файл і додає в кінець питання
 def write_question(filename):
     try:
-        with open(filename, 'a') as file:
+        with open(filename, 'a', encoding='utf-8') as file:
             question = input("Введіть питання: ")
             file.write(f"Питання: {question}\n")
     except IOError as err:
@@ -11,10 +11,10 @@ def write_question(filename):
     except Exception as err:
         print(f"Error: {err}")
 
-#записати відповідь у файл + ім'я, фамілія
+#записати відповідь у файл + ім'я, прізвище
 def write_answer(filename, answer_text):
     try:
-        with open(filename, 'a') as file:
+        with open(filename, 'a', encoding='utf-8') as file:
             file.write(f"{answer_text}\n")
     except IOError as err:
         print(f"Error with file: {err}")
@@ -32,20 +32,46 @@ def answer_question():
         if line == "":
             break
         answer.append(line)
-    return f"{surname} {name}\nВідповідь: {'\n'.join(answer)}"
+    return f"\n{surname} {name}\nВідповідь: {'\n'.join(answer)}"
 
 #функція читає і виводить зміст файлу
 def read_file(filename):
     try:
-        with open(filename, 'r') as file:
+        with open(filename, 'r', encoding='utf-8') as file:
             content = file.read()
             print(content)
     except IOError as err:
         print(f"Error with file: {err}")
     except Exception as err:
         print(f"Error: {err}")
-        
-read_file("output.txt")
-write_answer("output.txt", answer_question())
-write_question("output.txt")
-read_file("output.txt")
+
+
+#Плутенко
+# Функція додає меню, що надає користувачеві вибір дій:
+# 1. Прочитати вміст файлу.
+# 2. Додати дані до файлу.
+# 3. Додати питання до файлу.
+# 4. Вийти з програми.
+# Програма продовжує виконуватися, доки користувач не введе опцію "4" для завершення.
+def menu(name_file):
+    while True:
+        print("\nОберіть дію:")
+        print("1. Прочитати файл")
+        print("2. Додати відповідь")
+        print("3. Додати питання")
+        print("4. Вийти")
+        choice = input("(1, 2, 3 або 4): ")
+
+        if choice == '1':
+            read_file(name_file)
+        elif choice == '2':
+            write_answer(name_file, answer_question())
+        elif choice == '3':
+            write_question(name_file)
+        elif choice == '4':
+            print("Програма завершена.")
+            break
+        else:
+            print("Невірний вибір, спробуйте ще раз.")
+
+menu("output.txt")
