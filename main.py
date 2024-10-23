@@ -46,6 +46,15 @@ def read_file(filename):
         print(f"Error: {err}")
 
 
+def my_answer(name_file):
+    """Попов
+    Функція-заготовка з моєю відповіддю і подальшим питанням
+    """
+    answer = "\nПопов Максим\nВідповідь: Для цього потрібно використати режим відкриття файлу 'append':\nfile = open('filename', 'a')\nfile.write('text')"
+    write_answer(name_file, answer)
+    print("Відповідь додана. Вміст файлу тепер виглядає так:")
+    read_file(name_file)
+    write_question(name_file)
 #Плутенко
 # Функція додає меню, що надає користувачеві вибір дій:
 # 1. Прочитати вміст файлу.
@@ -53,6 +62,10 @@ def read_file(filename):
 # 3. Додати питання до файлу.
 # 4. Вийти з програми.
 # Програма продовжує виконуватися, доки користувач не введе опцію "4" для завершення.
+#
+# Попов
+# ---Оновлення---
+# Можна обрати 5-ий пункт з готовою відповіддю
 def menu(name_file):
     while True:
         print("\nОберіть дію:")
@@ -60,7 +73,8 @@ def menu(name_file):
         print("2. Додати відповідь")
         print("3. Додати питання")
         print("4. Вийти")
-        choice = input("(1, 2, 3 або 4): ")
+        print("5. Заготовка Попова Максима")
+        choice = input("(1, 2, 3, 4 або 5): ")
 
         if choice == '1':
             read_file(name_file)
@@ -71,6 +85,8 @@ def menu(name_file):
         elif choice == '4':
             print("Програма завершена.")
             break
+        elif choice == '5':
+            my_answer(name_file)
         else:
             print("Невірний вибір, спробуйте ще раз.")
 
